@@ -1,3 +1,18 @@
+//DomContentLoaded function makes sure that the JavaScript executes only after the document is loaded.
+// Variable declerations allows interaction with HTML elements using JavaScript (HTML elements are all assigned an ID in this case)
+document.addEventListener("DOMContentLoaded", function() {
+  const startButton = document.getElementById("start");
+  const questionTitle = document.getElementById("question-title");
+  const startScreen = document.getElementById("start-screen");
+  const timeSpan = document.getElementById("time");
+  const submitButton = document.getElementById("submit");
+  const enterInitials = document.getElementById("initials");
+  const questionsBox = document.getElementById("questions");
+  const endScreen = document.getElementById("end-screen");
+  const finalScore = document.getElementById("final-score");
+  const feedbackBox = document.getElementById("feedback");
+}
+
 
 // Array containing questions
 const questions = [
@@ -7,9 +22,3 @@ const questions = [
   { question: "How does a for loop start?", anwsers: ["for (i <= 5; i++)","for i = 1 to 5","for (i = 0; i < = 5), for (i = 0; i < = 5; i++)"], correct: 2},
 ];
 
-// Dom elements
-
-const startButton = document.getElementById("start");
-const questionTitle = document.getElementById("question-title");
-const startScreen = document.getElementById("start-screen");
-const 
