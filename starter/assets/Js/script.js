@@ -26,9 +26,19 @@ const questions = [
   { question: "How does a for loop start?", anwsers: ["for (i <= 5; i++)","for i = 1 to 5","for (i = 0; i < = 5), for (i = 0; i < = 5; i++)"], correct: 2},
 ];
 
-//event listners that initialize the quiz on click of the start button and save the score when the user click submit for an anwser.
+//event listners that initialize the quiz on click of the start button and save the score when the user clicks submit for an anwser.
 startButton.addEventListener("click", initializeQuiz);
 submitButton.addEventListener("click", saveScore); 
+
+
+// function that hides the start screen and displays the first question when the startButton is clicked
+
+function initializeQuiz() {
+  startScreen.style.display = "none";
+  questionsBox.style.displau = "block";
+  displayQuestion(currentQuestion);
+  startTimer();
+}
 
 
 
