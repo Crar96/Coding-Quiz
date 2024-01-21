@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const questionTitle = document.getElementById("question-title");
   const startScreen = document.getElementById("start-screen");
   const timeSpan = document.getElementById("time");
+  const choicesBox = document.getElementById("choices");
   const submitButton = document.getElementById("submit");
   const enterInitials = document.getElementById("initials");
   const questionsBox = document.getElementById("questions");
@@ -18,13 +19,32 @@ document.addEventListener("DOMContentLoaded", function() {
   let score = 0;
   let timer;
 
-// Array containing questions and anwsers
+  // Array containing questions and anwsers
 const questions = [
   { question: "Which event is specific to the keyboard?", anwsers: ["onkeydown", "onkeypush", "oninputreceived", "onkeybinput"], correct: 0},
-  { question: "how do you call a function?", anwsers: ["result myFunction()", "call myFunction()", "result = myFunction()", "result = myFunction()"], correct: 2},
+  { question: "how do you call a function?", anwsers: ["result myFunction()", "call myFunction()", "result.myFunction()", "result = myFunction()"], correct: 3},
   { question: "What is the correct place to insert JavaScript?", anwsers: ["The head section","The body section","both the head and body sections are correct"], correct: 2},
   { question: "How does a for loop start?", anwsers: ["for (i <= 5; i++)","for i = 1 to 5","for (i = 0; i < = 5), for (i = 0; i < = 5; i++)"], correct: 2},
 ];
+
+  // function to check if the anwser to the question is correct and updates the score by 1 if it is correct. If the anwser is not correct it subtracts 5 seconds from the time. If there are no more questions remaining then the quiz is ended.
+
+function checkAnswer(selectedIndex) {
+  const currentQ = questions[currentQuestion];
+  if (selectedIndex === currentQ.correct) {
+    score++;
+  } else {
+    timer -= 5;
+  }
+
+  currentQuestion++; 
+
+  if (currentQuestion < questions.length) {
+    displayQuestion(currentQuestion);
+  } else {
+    endQuiz();
+  }
+}
 
 //event listners that initialize the quiz on click of the start button and save the score when the user clicks submit for an anwser.
 startButton.addEventListener("click", initializeQuiz);
@@ -42,28 +62,19 @@ function initializeQuiz() {
 // function that displays the questions and anwser choices will generating a button for each anwser choice. The text content is set to the current question and the onclick attribute calls the checkAnswer() function when an anwser is clicked.
 
 function displayQuestion(i) {
-  const currentQuestion = questions[i];
-  questionTitle.textContent = currentQuestion.question;
-  choicesBox.innerHTML = currentQuestion.anwsers.map((anwser, i) =>
-  `<button onclick="checkAnswer(${i})">${anwser}</button>`).join("");
-}
+  const currentQ = questions[i];
+  questionTitle.textContent = currentQ.question;
 
-// function to check if the anwser to the question is correct and updates the score by 1 if it is correct. If the anwser is not correct it subtracts 5 seconds from the time. If there are no more questions remaining then the quiz is ended.
-
-function checkAnswer(selectedIndex) {
-  const currentQuestion = questions[currentQuestion];
-  if (selectedIndex === currentQuestion.correct) {
-    score++;
-  } else {
-    timer -=5;
-  }
-  currentQuestion++;
-
-  if (currentQuestion < questions.length) {
-    showQuestion(currentQuestion);
-  } else {
-    endQuiz();
-  }
+  choicesBox.innerHTML = "";
+  
+  currentQ.anwsers.forEach((answer, index) => {
+    const button = document.createElement("button");
+    button.textContent = answer;
+    button.addEventListener("click", function() {
+      checkAnswer(index);
+    });
+    choicesBox.appendChild(button);
+  });
 }
 
 // sets the timer duration and sets the countdown interval to 1 second. If timer reaches 0 then the quiz ends.
@@ -81,6 +92,8 @@ function startTimer() {
   }, 1000);
 }
 
+//
+
 function updateTimer () {
   timeSpan.textContent = timer;
 }
@@ -92,9 +105,7 @@ function endQuiz() {
 }
 
 function saveScore () {
-  const initials = enterInitials.ariaValueMax;
+  const initials = enterInitials.value;
   alert(`Score saved for ${initials}: ${score}`);
 }
-
-
-}
+});
