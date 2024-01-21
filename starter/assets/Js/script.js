@@ -45,7 +45,7 @@ function displayQuestion(i) {
   const currentQuestion = questions[i];
   questionTitle.textContent = currentQuestion.question;
   choicesBox.innerHTML = currentQuestion.anwsers.map((anwser, i) =>
-  '<button onclick="checkAnswer(${i})">${anwser}</button>').join("");
+  `<button onclick="checkAnswer(${i})">${anwser}</button>`).join("");
 }
 
 // function to check if the anwser to the question is correct and updates the score by 1 if it is correct. If the anwser is not correct it subtracts 5 seconds from the time. If there are no more questions remaining then the quiz is ended.
@@ -79,6 +79,21 @@ function startTimer() {
     endQuiz();
     }
   }, 1000);
+}
+
+function updateTimer () {
+  timeSpan.textContent = timer;
+}
+
+function endQuiz() {
+  questionsBox.style.display = "none";
+  endScreen.style.display = "block";
+  finalScore.textContent = score;
+}
+
+function saveScore () {
+  const initials = enterInitials.ariaValueMax;
+  alert(`Score saved for ${initials}: ${score}`);
 }
 
 
