@@ -30,15 +30,21 @@ const questions = [
 startButton.addEventListener("click", initializeQuiz);
 submitButton.addEventListener("click", saveScore); 
 
-
 // function that hides the start screen and displays the first question when the startButton is clicked
 
 function initializeQuiz() {
   startScreen.style.display = "none";
-  questionsBox.style.displau = "block";
+  questionsBox.style.display = "block";
   displayQuestion(currentQuestion);
   startTimer();
 }
 
+// function that displays the questions and anwser choices will generating a button for each anwser choice. The text content is set to the current question and the onclick attribute calls the checkAnswer() function when an anwser is clicked.
 
+function displayQuestion(i) {
+  const currentQuestion = questions[i];
+  questionTitle.textContent = currentQuestion.question;
+  choicesBox.innerHTML = currentQuestion.anwsers.map((anwser, i) =>
+  '<button onclick="checkAnswer(${i})">${anwser}</button>').join("");
+}
 
