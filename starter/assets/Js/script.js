@@ -48,3 +48,24 @@ function displayQuestion(i) {
   '<button onclick="checkAnswer(${i})">${anwser}</button>').join("");
 }
 
+// function to check if the anwser to the question is correct and updates the score by 1 if it is correct. If the anwser is not correct it subtracts 5 seconds from the time. If there are no more questions remaining then the quiz is ended.
+
+function checkAnswer(selectedIndex) {
+  const currentQuestion = questions[currentQuestion];
+  if (selectedIndex === currentQuestion.correct) {
+    score++;
+  } else {
+    timer -=5;
+  }
+  currentQuestion++;
+
+  if (currentQuestion < questions.length) {
+    showQuestion(currentQuestion);
+  } else {
+    endQuiz();
+  }
+}
+
+
+}
+}
