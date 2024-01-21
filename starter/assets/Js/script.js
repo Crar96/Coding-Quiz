@@ -66,6 +66,20 @@ function checkAnswer(selectedIndex) {
   }
 }
 
+// sets the timer duration and sets the countdown interval to 1 second. If timer reaches 0 then the quiz ends.
 
+function startTimer() {
+  timer = 60;
+  updateTimer();
+  setInterval(function () {
+    timer--;
+    updateTimer();
+
+  if (timer <= 0) {
+    endQuiz();
+    }
+  }, 1000);
 }
+
+
 }
