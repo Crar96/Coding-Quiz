@@ -92,7 +92,7 @@ function startTimer() {
   }, 1000);
 }
 
-//
+// function to update and remove the questions when the timer gets to 0 and display the final score for the test.
 
 function updateTimer () {
   timeSpan.textContent = timer;
@@ -103,6 +103,9 @@ function endQuiz() {
   endScreen.style.display = "block";
   finalScore.textContent = score;
 }
+
+
+// function to save score to the console log and add it to local stora
 
 function saveScore () {
   const initials = enterInitials.value;
