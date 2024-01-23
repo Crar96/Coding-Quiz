@@ -105,7 +105,7 @@ function endQuiz() {
 }
 
 
-// function to save score to the console log and add it to local stora
+// function to save score to the console log and add it to local storage THIS FUNCTION DOES NOT WORK
 
 function saveScore () {
   const initials = enterInitials.value;
